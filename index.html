@@ -1,344 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KM Bookshelf</title>
-<style>
-  :root{
-    --ink:#22252b;
-    --muted:#6b7280;
-    --paper:#ffffff;
-    --wood:#8a5a3b;
-    --wood-dark:#5d3a25;
-    --accent:#6d4aff;
-    --bg:#f3ede4;
-    --radius:12px;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family:"Segoe UI",Arial,Helvetica,sans-serif;
-    color:var(--ink);
-    background:radial-gradient(circle at 20% 0%, #fffaf3 0%, transparent 55%), var(--bg);
-    min-height:100vh;
-  }
-
-  /* ---------- header ---------- */
-  header.site{
-    background:linear-gradient(160deg,#3a3129,#221d18);
-    color:#fdf8f1;
-    padding:44px 20px 40px;
-    text-align:center;
-    border-bottom:4px solid var(--wood);
-  }
-  header.site h1{
-    margin:0;
-    font-size:clamp(26px,4vw,40px);
-    letter-spacing:.06em;
-  }
-  header.site p.tagline{
-    margin:12px auto 0;
-    max-width:760px;
-    font-size:16px;
-    line-height:1.65;
-    color:#d9cfc2;
-  }
-  header.site p.count{
-    margin:18px 0 0;
-    font-size:13px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:#a89a89;
-  }
-
-  /* ---------- search ---------- */
-  .toolbar{
-    max-width:1180px;
-    margin:26px auto 0;
-    padding:0 20px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    align-items:center;
-    justify-content:center;
-  }
-  .toolbar input{
-    flex:1 1 280px;
-    max-width:420px;
-    padding:12px 16px;
-    font-size:15px;
-    border:1px solid #d8cec1;
-    border-radius:999px;
-    background:#fff;
-    outline:none;
-  }
-  .toolbar input:focus{border-color:var(--wood);box-shadow:0 0 0 3px rgba(138,90,59,.15)}
-
-  /* ---------- shelf ---------- */
-  .shelf{
-    max-width:1180px;
-    margin:0 auto;
-    padding:26px 20px 60px;
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
-    gap:26px 22px;
-  }
-  .book{
-    background:var(--paper);
-    border:1px solid #e6ddd2;
-    border-radius:var(--radius);
-    padding:16px;
-    display:flex;
-    flex-direction:column;
-    box-shadow:0 6px 16px rgba(70,50,30,.08);
-    transition:transform .18s ease, box-shadow .18s ease;
-  }
-  .book:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(70,50,30,.16)}
-
-  .cover{
-    position:relative;
-    width:100%;
-    aspect-ratio:2/3;
-    border-radius:8px;
-    overflow:hidden;
-    background:#efe7dc;
-    margin-bottom:14px;
-    box-shadow:inset 0 0 0 1px rgba(0,0,0,.05);
-  }
-  .cover img{width:100%;height:100%;object-fit:cover;display:block}
-  .cover.spine{
-    background:linear-gradient(135deg,var(--wood),var(--wood-dark));
-    color:#fff;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:18px 14px;
-  }
-  .cover.spine .spine-title{font-size:16px;font-weight:700;line-height:1.35}
-  .cover.spine .spine-author{
-    margin-top:10px;font-size:12px;letter-spacing:.08em;
-    text-transform:uppercase;opacity:.85;
-  }
-
-  .book h3{margin:0 0 4px;font-size:17px;line-height:1.3}
-  .book .byline{margin:0 0 10px;font-size:13px;color:var(--muted)}
-  .book .blurb{margin:0 0 14px;font-size:13.5px;line-height:1.55;color:#4b5158;flex:1 1 auto}
-  .tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
-  .tag{
-    font-size:11px;letter-spacing:.06em;text-transform:uppercase;
-    color:#7a6455;background:#f1e8dd;border-radius:999px;padding:4px 9px;
-  }
-  .actions{display:flex;gap:10px}
-  .actions a{
-    flex:1;text-align:center;text-decoration:none;font-size:14px;font-weight:600;
-    padding:10px 8px;border-radius:8px;
-    transition:background .15s ease,color .15s ease;
-  }
-  .read{background:var(--accent);color:#fff}
-  .read:hover{background:#5533e0}
-  .download{background:#f1e8dd;color:#5d4433}
-  .download:hover{background:#e4d6c5}
-
-  .empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:50px 10px;font-size:15px}
-
-  /* ---------- footer ---------- */
-  footer.site{
-    background:#221d18;color:#b9ada0;padding:34px 20px;text-align:center;
-    font-size:13.5px;line-height:1.7;border-top:4px solid var(--wood);
-  }
-  footer.site a{color:#c9a888;text-decoration:none}
-  footer.site a:hover{text-decoration:underline}
-
-  @media (max-width:520px){
-    .shelf{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:18px 14px}
-    .book{padding:12px}
-    .actions{flex-direction:column}
-  }
-</style>
+    <meta charset="UTF-8">
+    <title>Kyra Michel Bookshelf</title>
 </head>
-<body>
+<body style="margin:0;font-family:Arial,sans-serif;background:#f5f5f5">
 
-<header class="site">
-  <h1>KYRA MICHEL BOOKSHELF</h1>
-  <p class="tagline">Explore my books that look at the world through scientific, philosophical, and other fresh perspectives. Read online or download them freely.</p>
-  <p class="count" id="count"></p>
+<header style="background:#333;color:#fff;padding:35px 0;border-bottom:3px solid #77aaff;text-align:center">
+    <p style="margin:0;font-size:26px;font-weight:bold">KYRA MICHEL BOOKSHELF</p>
+    <p style="margin:10px 0 20px 0;font-size:18px">READ ONLINE OR DOWNLOAD</p>
+    <p style="margin:0;font-size:16px;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.6;padding:0 20px">
+        Explore books that look at the world through scientific, philosophical, and other fresh perspectives. Read online or download them freely.
+    </p>
 </header>
 
-<div class="toolbar">
-  <input id="search" type="search" placeholder="Search by title, author or tag…" aria-label="Search the bookshelf">
+<div style="padding:20px">
+
+    <!-- Row 1 -->
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:20px">
+        <div style="background:#fff;border:1px solid #ddd;padding:20px;border-radius:5px;
+                    box-shadow:0 0 10px rgba(0,0,0,0.1);flex:0 0 calc(20% - 16px);max-width:calc(20% - 16px);text-align:center;">
+            <a href="https://github.com/ml-ai-lab/My-Bookshelf/blob/main/COSMIC%20JOURNEY%20KYRA%20MICHEL.pdf" target="_blank" rel="noopener" style="color:#007BFF;text-decoration:none;font-size:16px;">Cosmic Journey </a>
+        </div>
+
+        <div style="background:#fff;border:1px solid #ddd;padding:20px;border-radius:5px;
+                    box-shadow:0 0 10px rgba(0,0,0,0.1);flex:0 0 calc(20% - 16px);max-width:calc(20% - 16px);text-align:center;">
+            <a href="https://github.com/ml-ai-lab/My-Bookshelf/blob/main/FUNCTIONAL%20GRAD%20DECENT%20KYRA%20MICHEL.pdf#:~:text=FUNCTIONAL%20GRAD-,DECENT,-KYRA%20MICHEL.pdf" target="_blank" rel="noopener" style="color:#007BFF;text-decoration:none;font-size:16px;">Functional Gradient Descent</a>
+        </div>
+
+        <div style="background:#fff;border:1px solid #ddd;padding:20px;border-radius:5px;
+                    box-shadow:0 0 10px rgba(0,0,0,0.1);flex:0 0 calc(20% - 16px);max-width:calc(20% - 16px);text-align:center;">
+            <a href="https://github.com/ml-ai-lab/My-Bookshelf/blob/main/SR%20KYRA%20MICHEL.pdf#:~:text=SR%20KYRA-,MICHEL.pdf" target="_blank" rel="noopener" style="color:#007BFF;text-decoration:none;font-size:16px;">Subconscious Recalibration </a>
+        </div>
+
+        <div style="background:#fff;border:1px solid #ddd;padding:20px;border-radius:5px;
+                    box-shadow:0 0 10px rgba(0,0,0,0.1);flex:0 0 calc(20% - 16px);max-width:calc(20% - 16px);text-align:center;">
+            <a href="https://github.com/ml-ai-lab/My-Bookshelf/blob/main/THE%20CONDITION%20FOR%20THOUGHT%20KYRA%20MICHEL.pdf#:~:text=THE-,CONDITION,-FOR%20THOUGHT%20KYRA.pdf#:~:text=THE-,CONDITION,-FOR%20THOUGHT%20KYRA.pdf" target="_blank" rel="noopener" style="color:#007BFF;text-decoration:none;font-size:16px;"> Two Essays for Modern Life</a>
+        </div>
+
+        <div style="background:#fff;border:1px solid #ddd;padding:20px;border-radius:5px;
+                    box-shadow:0 0 10px rgba(0,0,0,0.1);flex:0 0 calc(20% - 16px);max-width:calc(20% - 16px);text-align:center;">
+            <a href="https://github.com/ml-ai-lab/My-Bookshelf/blob/main/WE%20KYRA%20MICHEL.pdf#:~:text=WE%20KYRA-,MICHEL.pdf" target="_blank" rel="noopener" style="color:#007BFF;text-decoration:none;font-size:16px;">Wireless Energy Networks</a>
+        </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:20px">
+        <div style="background:#fff;border:1px solid #ddd;padding:20px;border-radius:5px;
+                    box-shadow:0 0 10px rgba(0,0,0,0.1);flex:0 0 calc(20% - 16px);max-width:calc(20% - 16px);text-align:center;">
+            <a href="https://github.com/ml-ai-lab/My-Bookshelf/blob/main/WE%20KYRA%20MICHEL.pdf#:~:text=v2eHeal25,-Viz.pdf" target="_blank" rel="noopener" style="color:#007BFF;text-decoration:none;font-size:16px;"> 25 Visualizations with Affirmations</a>
+        </div>
+
+        <div style="background:#fff;border:1px solid #ddd;padding:20px;border-radius:5px;
+                    box-shadow:0 0 10px rgba(0,0,0,0.1);flex:0 0 calc(20% - 16px);max-width:calc(20% - 16px);text-align:center;">
+            <a href="https://...book-07.pdf" target="_blank" rel="noopener" style="color:#007BFF;text-decoration:none;font-size:16px;">Book </a>
+        </div>
+
+        <div style="background:#fff;border:1px solid #ddd;padding:20px;border-radius:5px;
+                    box-shadow:0 0 10px rgba(0,0,0,0.1);flex:0 0 calc(20% - 16px);max-width:calc(20% - 16px);text-align:center;">
+            <a href="https://...book-08.pdf" target="_blank" rel="noopener" style="color:#007BFF;text-decoration:none;font-size:16px;">Book </a>
+        </div>
+
+        <div style="background:#fff;border:1px solid #ddd;padding:20px;border-radius:5px;
+                    box-shadow:0 0 10px rgba(0,0,0,0.1);flex:0 0 calc(20% - 16px);max-width:calc(20% - 16px);text-align:center;">
+            <a href="https://...book-09.pdf" target="_blank" rel="noopener" style="color:#007BFF;text-decoration:none;font-size:16px;">Book </a>
+        </div>
+
+        <div style="background:#fff;border:1px solid #ddd;padding:20px;border-radius:5px;
+                    box-shadow:0 0 10px rgba(0,0,0,0.1);flex:0 0 calc(20% - 16px);max-width:calc(20% - 16px);text-align:center;">
+            <a href="https://...book-10.pdf" target="_blank" rel="noopener" style="color:#007BFF;text-decoration:none;font-size:16px;"> Book </a>
+        </div>
+    </div>
+
 </div>
 
-<main class="shelf" id="shelf"></main>
-
-<footer class="site">
-  <p style="margin:0">© 2026 Kyra Michel. Free to read and download for personal use. No permission is granted to repost, sell, or modify this book.</p>
+<!-- Footer -->
+<footer style="background:#333;color:#ccc;padding:35px 0;border-top:3px solid #77aaff;text-align:center;font-size:14px">
+    <p style="margin:0 0 10px 0">© 2026 Kyra Michel. Free to read and download for personal use.</p>
+    <p style="margin:0 0 10px 0">No permission granted to repost, sell, or modify this book.</p>
 </footer>
 
-<script>
-/* ============================================================
-   EDIT THIS LIST TO ADD / REMOVE BOOKS
-   ------------------------------------------------------------
-   title  : book title (required)
-   author : author name
-   year   : year or edition (optional)
-   cover  : path to cover image, e.g. "covers/my-book.jpg"
-            leave as "" to show a coloured spine instead
-   file   : path to the PDF, e.g. "https://...path-to-book.pdf" (required)
-   blurb  : one or two lines of description
-   tags   : keywords used by the search box
-   ============================================================ */
-const BOOKS = [
-  {
-    title: "Book Title One",
-    author: "Author Name",
-    year: "2024",
-    cover: "covers/book-one.jpg",
-    file: "https://...path-to-book.pdf",
-    blurb: "Short description of what this book is about.",
-    tags: ["fiction", "novel"]
-  },
-  {
-    title: "Book Title Two",
-    author: "Another Author",
-    year: "2025",
-    cover: "",
-    file: "https://...path-to-book.pdf",
-    blurb: "Leave the cover blank and the shelf draws a spine for you.",
-    tags: ["nonfiction", "essays"]
-  },
-  {
-    title: "Collected Notes",
-    author: "KM",
-    year: "2026",
-    cover: "covers/notes.jpg",
-    file: "https://...path-to-book.pdf",
-    blurb: "Working notes, drafts and reference material.",
-    tags: ["notes", "reference"]
-  }
-];
-
-const shelf   = document.getElementById("shelf");
-const countEl = document.getElementById("count");
-const searchEl= document.getElementById("search");
-
-function spineBlock(book){
-  const wrap = document.createElement("div");
-  wrap.className = "spine";
-  const t = document.createElement("div");
-  t.className = "spine-title";
-  t.textContent = book.title;
-  wrap.appendChild(t);
-  if (book.author){
-    const a = document.createElement("div");
-    a.className = "spine-author";
-    a.textContent = book.author;
-    wrap.appendChild(a);
-  }
-  return wrap;
-}
-
-function makeCard(book){
-  const card = document.createElement("article");
-  card.className = "book";
-
-  const cover = document.createElement("div");
-  cover.className = "cover";
-  if (book.cover){
-    const img = document.createElement("img");
-    img.src = book.cover;
-    img.alt = "Cover of " + book.title;
-    img.loading = "lazy";
-    img.addEventListener("error", function(){
-      img.remove();
-      cover.classList.add("spine");
-      cover.appendChild(spineBlock(book));
-    });
-    cover.appendChild(img);
-  } else {
-    cover.classList.add("spine");
-    cover.appendChild(spineBlock(book));
-  }
-  card.appendChild(cover);
-
-  const h3 = document.createElement("h3");
-  h3.textContent = book.title;
-  card.appendChild(h3);
-
-  const by = document.createElement("p");
-  by.className = "byline";
-  by.textContent = [book.author, book.year].filter(Boolean).join(" · ");
-  card.appendChild(by);
-
-  if (book.blurb){
-    const b = document.createElement("p");
-    b.className = "blurb";
-    b.textContent = book.blurb;
-    card.appendChild(b);
-  }
-
-  if (book.tags && book.tags.length){
-    const tags = document.createElement("div");
-    tags.className = "tags";
-    book.tags.forEach(function(tag){
-      const s = document.createElement("span");
-      s.className = "tag";
-      s.textContent = tag;
-      tags.appendChild(s);
-    });
-    card.appendChild(tags);
-  }
-
-  const actions = document.createElement("div");
-  actions.className = "actions";
-
-  const read = document.createElement("a");
-  read.className = "read";
-  read.href = book.file;
-  read.target = "_blank";
-  read.rel = "noopener";
-  read.textContent = "Read";
-
-  const dl = document.createElement("a");
-  dl.className = "download";
-  dl.href = book.file;
-  dl.setAttribute("download", "");
-  dl.textContent = "PDF";
-
-  actions.appendChild(read);
-  actions.appendChild(dl);
-  card.appendChild(actions);
-
-  return card;
-}
-
-function render(list){
-  shelf.innerHTML = "";
-  if (!list.length){
-    const p = document.createElement("p");
-    p.className = "empty";
-    p.textContent = "No books match that search.";
-    shelf.appendChild(p);
-    return;
-  }
-  list.forEach(function(book){ shelf.appendChild(makeCard(book)); });
-}
-
-function applyFilter(){
-  const q = searchEl.value.trim().toLowerCase();
-  if (!q){ render(BOOKS); return; }
-  render(BOOKS.filter(function(b){
-    return [b.title, b.author, b.year, b.blurb, (b.tags || []).join(" ")]
-      .join(" ").toLowerCase().indexOf(q) !== -1;
-  }));
-}
-
-searchEl.addEventListener("input", applyFilter);
-
-render(BOOKS);
-countEl.textContent = BOOKS.length + (BOOKS.length === 1 ? " title on the shelf" : " titles on the shelf");
-</script>
 </body>
 </html>
